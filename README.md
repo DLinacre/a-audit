@@ -1,58 +1,57 @@
-<div align="center">
+# Arena Audit (a-audit) — Universal Audit Prompt Builder
 
-<img src="./audit-dlinacre-github-io/assets/banner.svg" alt="Arena Audit Banner" width="100%" />
+Production-grade, evidence-aware audit prompt generator for AI Agent Mode.
 
-# Arena Audit (A-Audit) v4.5 — Elite Audit & Growth Suite
+[![Live App](https://img.shields.io/badge/Live-dlinacre.github.io%2Fa--audit-f0b429?style=flat-square)](https://dlinacre.github.io/a-audit/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](./LICENSE)
+[![100% Client-Side](https://img.shields.io/badge/100%25-Client--Side-5b8cff?style=flat-square)](https://dlinacre.github.io/a-audit/)
+[![Offline Capable](https://img.shields.io/badge/PWA-Service%20Worker%20Offline-a78bfa?style=flat-square)](https://dlinacre.github.io/a-audit/)
 
-[![Status](https://img.shields.io/badge/Status-Production%20Ready-3ecf8e?style=flat-square)]()
-[![Score](https://img.shields.io/badge/Audit%20Score-99.5%2F100-5b8cff?style=flat-square)]()
-[![PWA](https://img.shields.io/badge/PWA-Offline%20Ready-f0b429?style=flat-square)]()
-[![WCAG 2.2](https://img.shields.io/badge/Accessibility-WCAG%20AA-a78bfa?style=flat-square)]()
-[![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)]()
-
-**Production-grade, evidence-aware audit prompt generator optimized for AI Agent Mode (Arena.ai).**
-
-[Live Application](https://dlinacre.github.io/a-audit) · [Executive Summary](./audit-dlinacre-github-io/Executive-Summary.md) · [Full Audit](./audit-dlinacre-github-io/Full-Audit.md) · [Priority Roadmap](./audit-dlinacre-github-io/Priority-Roadmap.md)
-
-</div>
+**[Open the live app →](https://dlinacre.github.io/a-audit/)**
 
 ---
 
-## ✨ Overview
+## What it does
 
-**Arena Audit** is an advanced, 100% client-side web application designed to bridge the gap between digital product engineering and AI agent execution. By synthesizing a 14-expert multi-disciplinary team across 15 rigorous evaluation categories, it produces structured, highly actionable Markdown prompts ready for AI agent workflows.
+Most AI agents fail audits for a simple reason: the brief was thin. Arena Audit turns a target —
+a URL, a store listing, a package name, or a dropped folder of up to 300 local source files —
+into a complete, structured audit brief: **15 evaluation categories × 14 expert roles**, emitted
+as one clean Markdown prompt ready to paste into [Arena Agent Mode](https://arena.ai).
 
----
+## Features
 
-## 🎨 Brand Identity & Design System
+- **Evidence-aware input** — drop files/folders; type is inferred from file signatures and a
+  compact evidence manifest (names, sizes, classification) is generated for the agent.
+- **Fail-safe prompt builder** — empty fields auto-resolve with documented assumptions; the
+  prompt is always complete and agent-ready.
+- **Shareable configurations** — every change is encoded in the URL hash; copy the link to
+  share an exact builder state.
+- **Custom preset manager** — save, export (`.json`) and import community audit configurations
+  (stored locally in `localStorage`).
+- **Mobile prompt drawer** — Configure / Preview tab bar on small screens.
+- **Accessible by design** — skip links, `prefers-reduced-motion`, labelled controls,
+  native `<dialog>` handoff, WCAG 2.2 AA-conformant contrast.
+- **Private by design** — 100% client-side: no cookies, no analytics, no accounts.
+  Files are read locally and never uploaded.
+- **Installable PWA** — service worker provides full offline support after first visit.
 
-Inspired by elite developer tooling (Linacre aesthetic), Arena Audit features a sophisticated dark-mode palette:
-- **Ink Black Core:** `#0b0f14` background with elevated card surfaces (`#161d28`).
-- **Amber & Electric Blue Accents:** Glowing glow shadows (`#5b8cff`, `#a78bfa`, `#f0b429`) with pulse-line dividers.
-- **Typography:** Inter for clean UI hierarchy paired with JetBrains Mono for code blocks and prompt output.
+## Tech
 
----
+Single static HTML file (vanilla JS/CSS, zero runtime dependencies, no build step) deployed
+via GitHub Pages. `robots.txt` + `sitemap.xml` + JSON-LD (`SoftwareApplication`) included.
 
-## 📂 Package Index & Deliverables
+## Local development
 
-- **[Executive-Summary.md](./audit-dlinacre-github-io/Executive-Summary.md)** — High-level scoring table, biggest strengths, weaknesses, and ROI impact.
-- **[Full-Audit.md](./audit-dlinacre-github-io/Full-Audit.md)** — Complete 15-category professional evaluation conducted by the 14-expert team.
-- **[Priority-Roadmap.md](./audit-dlinacre-github-io/Priority-Roadmap.md)** — Phased implementation plan (Today → Strategic long-term).
-- **[Developer-Tasks.md](./audit-dlinacre-github-io/Developer-Tasks.md)** — GitHub Issues-ready task list with acceptance criteria and effort estimates.
-- **[Phased-Implementation-Plan.md](./audit-dlinacre-github-io/Phased-Implementation-Plan.md)** — 4-phase execution breakdown.
-- **[Assumptions-and-Gaps.md](./audit-dlinacre-github-io/Assumptions-and-Gaps.md)** — Verified public signals and scope limitations.
+```bash
+git clone https://github.com/DLinacre/a-audit.git
+cd a-audit
+python3 -m http.server 8080   # or any static server — then open http://localhost:8080
+```
 
----
+## Security
 
-## 🚀 Key Features
+Found something? Please report it privately — see [SECURITY.md](./SECURITY.md).
 
-1. **Intelligent Auto-Resolution:** Automatically detects product types and infers evidence from local file drops (up to 300 files).
-2. **Post-Copy Guidance Handoff:** Glassmorphism modal explaining next steps in Arena Agent Mode.
-3. **Custom Preset Manager:** Save, export (`.json`), and import community audit configurations in `localStorage`.
-4. **Mobile Prompt Drawer:** Responsive sticky bottom bar for effortless switching between configuration and prompt preview on smartphones.
-5. **Direct API Dispatch:** Simulate direct dispatch to AI agent endpoints with progress feedback.
-6. **Elite Accessibility & SEO:** Skip-links, WCAG AA compliance, structured Schema JSON-LD, and Open Graph social metadata.
+## License
 
----
-
-*Generated by Arena.ai Multi-Disciplinary Agent Team · Date: July 20, 2026*
+[MIT](./LICENSE) © David Linacre

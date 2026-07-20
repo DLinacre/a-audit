@@ -6,4 +6,12 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  <!-- Add future content pages here with real lastmod dates:
+  <url>
+    <loc>https://dlinacre.github.io/a-audit/about</loc>
+    <lastmod>YYYY-MM-DD</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  -->
 </urlset>

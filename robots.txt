@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /audit-dlinacre-github-io/
 
 Sitemap: https://dlinacre.github.io/a-audit/sitemap.xml

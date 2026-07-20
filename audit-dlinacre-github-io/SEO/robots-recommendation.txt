@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://dlinacre.github.io/a-audit/sitemap.xml

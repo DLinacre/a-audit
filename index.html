@@ -3,17 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A-Audit · Universal Audit Prompt Builder</title>
-  <meta name="description" content="A-Audit builds production-grade, evidence-aware audit prompts for digital products — ready for Arena Agent Mode." />
+  <title>Arena Audit · Universal Audit Prompt Builder</title>
+  <meta name="description" content="Build production-grade, evidence-aware audit prompts for websites, apps, APIs and SaaS — 15 categories, 14 expert roles, 100% client-side. Ready for AI Agent Mode." />
+  <link rel="canonical" href="https://dlinacre.github.io/a-audit/" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; manifest-src 'self'; connect-src 'none'; worker-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'" />
+  <meta name="theme-color" content="#0b0f14" />
+  <meta name="color-scheme" content="dark" />
   
-  <!-- Phase 1: Social Preview Metadata -->
+  <!-- Social preview metadata -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Arena Audit · Universal Audit Prompt Builder" />
   <meta property="og:description" content="A-Audit builds production-grade, evidence-aware audit prompts for digital products — ready for Arena Agent Mode." />
+  <meta property="og:site_name" content="Arena Audit" />
   <meta property="og:url" content="https://dlinacre.github.io/a-audit/" />
+  <meta property="og:image" content="https://dlinacre.github.io/a-audit/assets/og-preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Arena Audit — dark interface preview with the generated multi-expert audit prompt" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Arena Audit · Universal Audit Prompt Builder" />
-  <meta name="twitter:description" content="A-Audit builds production-grade, evidence-aware audit prompts for digital products — ready for Arena Agent Mode." />
+  <meta name="twitter:description" content="Production-grade, evidence-aware audit prompts for AI Agent Mode. 15 categories · 14 experts · 100% client-side." />
+  <meta name="twitter:image" content="https://dlinacre.github.io/a-audit/assets/og-preview.png" />
+  <meta name="twitter:image:alt" content="Arena Audit — evidence-aware audit prompt builder" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Arena Audit",
+    "alternateName": "A-Audit",
+    "operatingSystem": "Any (web browser)",
+    "applicationCategory": "DeveloperApplication",
+    "url": "https://dlinacre.github.io/a-audit/",
+    "image": "https://dlinacre.github.io/a-audit/assets/og-preview.png",
+    "description": "Arena Audit builds production-grade, evidence-aware audit prompts for digital products — ready for AI Agent Mode. 15 audit categories, 14 expert roles, 100% client-side.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "David Linacre", "url": "https://github.com/DLinacre" },
+    "license": "https://opensource.org/licenses/MIT",
+    "codeRepository": "https://github.com/DLinacre/a-audit",
+    "isAccessibleForFree": true,
+    "browserRequirements": "Requires JavaScript"
+  }
+  </script>
+
   <style>
     :root {
       --bg: #0b0f14;
@@ -557,7 +590,7 @@
       top: 10px;
     }
 
-    /* Phase 3: Mobile Prompt Drawer Toggle Bar */
+    /* Mobile prompt drawer toggle bar */
     .mobile-toggle-bar {
       display: none;
       position: fixed;
@@ -598,8 +631,65 @@
       color: #fff;
       box-shadow: 0 2px 10px var(--accent-glow);
     }
+
+    /* === WCAG 2.2 AA contrast overrides === */
+    :root { color-scheme: dark; }
+    .btn-primary {
+      background: linear-gradient(135deg, #3b6fe0, #5b64e8 40%, #7a4de8);
+      color: #fff; box-shadow: 0 8px 24px var(--accent-glow);
+    }
+    .btn-primary:hover { filter: brightness(1.1); box-shadow: 0 10px 28px var(--accent-glow); }
+    .mobile-tab-btn.active { background: #3b6fe0; border-color: #3b6fe0; color: #fff; }
+    .input, .select, .textarea { border-color: #54689b; }
+    #promptOut:focus { outline: none; }
+
+    /* Accessible dialog */
+    dialog.audit-dialog {
+      background: var(--bg-card); color: var(--text);
+      border: 1px solid var(--border-strong); border-radius: var(--radius);
+      padding: 24px; max-width: 420px; box-shadow: var(--shadow);
+    }
+    dialog.audit-dialog::backdrop { background: rgba(4, 8, 14, 0.6); backdrop-filter: blur(4px); }
+    .modal-cta {
+      background: #3b6fe0; color: #fff; border: none;
+      padding: 8px 18px; border-radius: 8px; cursor: pointer; font-weight: 500;
+    }
+    .modal-cta:hover { filter: brightness(1.1); }
+    .modal-cta:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 2px; }
+
+    /* Site footer */
+    .site-footer {
+      margin-top: 32px; padding: 20px 16px calc(20px + 70px); /* 70px clears mobile bar */
+      border-top: 1px solid var(--border); text-align: center;
+    }
+    @media (min-width: 1101px) { .site-footer { padding-bottom: 20px; } }
+    .site-footer nav { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: center; }
+    .site-footer a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+    .site-footer a:hover { color: var(--accent-hover); }
+    .site-footer a:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 2px; }
+    .site-footer .fineprint { color: var(--text-dim); font-size: 0.8rem; margin: 12px 0 0; }
+
+    /* About / FAQ — crawlable static content */
+    .about { max-width: 960px; margin: 40px auto 0; padding: 0 20px; }
+    .about h2 { font-size: 1.4rem; margin: 0 0 10px; }
+    .about h3 { font-size: 1.05rem; margin: 28px 0 8px; color: var(--accent-hover); }
+    .about p, .about li { color: var(--text-muted); line-height: 1.65; font-size: 0.95rem; }
+    .about ol, .about ul { padding-left: 22px; }
+    .about .callout {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px 20px; margin-top: 16px;
+    }
+    .about details {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 12px 16px; margin-top: 10px;
+    }
+    .about summary { cursor: pointer; font-weight: 600; font-size: 0.95rem; }
+    .about summary:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 2px; }
+    .about details p { margin: 8px 0 0; }
   </style>
-  <!-- Phase 4: PWA Manifest -->
+  <!-- Icons & PWA manifest -->
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
   <link rel="manifest" href="manifest.json" />
 </head>
 <body>
@@ -622,10 +712,10 @@
     </div>
   </header>
 
-  <!-- Phase 3: Mobile Prompt Drawer Toggle Bar -->
-  <div class="mobile-toggle-bar" id="mobileToggleBar">
-    <button type="button" class="mobile-tab-btn active" id="mobileTabControls">⚙️ Configure</button>
-    <button type="button" class="mobile-tab-btn" id="mobileTabPreview">📋 View Prompt</button>
+  <!-- Mobile prompt drawer toggle -->
+  <div class="mobile-toggle-bar" id="mobileToggleBar" role="tablist" aria-label="Builder view">
+    <button type="button" class="mobile-tab-btn active" id="mobileTabControls" role="tab" aria-selected="true">⚙️ Configure</button>
+    <button type="button" class="mobile-tab-btn" id="mobileTabPreview" role="tab" aria-selected="false">📋 View Prompt</button>
   </div>
 
   <div class="shell mobile-view-controls">
@@ -672,8 +762,8 @@
                 id="targetInput"
                 class="input"
                 type="text"
-                value="linacre.site"
-                placeholder="example.com, app name, package, or store URL"
+                value=""
+                placeholder="yoursite.com · com.vendor.app · package id · or drop files below"
                 spellcheck="false"
                 autocomplete="off"
               />
@@ -684,7 +774,7 @@
 
           <div class="field">
             <label class="field-label">Local evidence (optional)</label>
-            <div class="upload-zone" id="uploadZone" role="group" aria-label="Local evidence upload" aria-describedby="uploadPrivacy fileSummary">
+            <div class="upload-zone" id="uploadZone" role="group" aria-label="Local evidence upload" aria-describedby="uploadPrivacy fileSummary" tabindex="0">
               <div class="upload-title">📂 Add files or a project folder</div>
               <p id="uploadPrivacy">Drop files here, or use the buttons below. Everything is analysed locally in your browser; only a compact manifest is placed in the prompt.</p>
               <div class="upload-actions">
@@ -836,7 +926,7 @@
       <div class="hero-stats">
         <div class="stat">
           <div class="k">Target</div>
-          <div class="v accent" id="statTarget">linacre.site</div>
+          <div class="v accent" id="statTarget">—</div>
         </div>
         <div class="stat">
           <div class="k">Resolved type</div>
@@ -862,7 +952,7 @@
           <div class="prompt-toolbar">
             <button type="button" class="btn btn-secondary" id="btnRegenerate" title="Rebuild prompt">↻ Rebuild</button>
             <button type="button" class="btn btn-secondary" id="btnDownload">↓ .md</button>
-            <button type="button" class="btn btn-secondary" id="btnSendApi" title="Dispatch directly to Arena Agent API">🚀 Send to Agent</button>
+            <button type="button" class="btn btn-secondary" id="btnSendApi" title="Copies your prompt and opens Agent Arena.AI Mode in a new tab">🚀 Open in Arena.AI</button>
             <button type="button" class="btn btn-primary" id="btnCopy">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
               Copy for Arena.AI
@@ -882,7 +972,7 @@
               <span>Empty fields auto-resolve · <span class="kbd">Ctrl</span>+<span class="kbd">Enter</span> copy</span>
             </div>
             <div class="prompt-scroll">
-              <pre id="promptOut"></pre>
+              <pre id="promptOut" tabindex="-1"></pre>
             </div>
           </div>
 
@@ -906,6 +996,62 @@
       </section>
     </main>
   </div>
+
+  <section class="about" id="about" aria-labelledby="aboutTitle">
+    <h2 id="aboutTitle">What Arena Audit does</h2>
+    <p>
+      Most AI agents fail audits for a boring reason: the brief was thin. Arena Audit turns your
+      target — a URL, an app, a repo, even a dropped folder of source files — into a complete,
+      structured audit brief. Fifteen evaluation categories. Fourteen expert roles. One Markdown
+      prompt your agent can execute immediately.
+    </p>
+
+    <h3>How it works</h3>
+    <ol>
+      <li><strong>Point it at anything.</strong> Paste a website, store listing, or package name — or drop up to 300 local files. Type detection and fail-safe defaults fill every blank.</li>
+      <li><strong>Shape the audit.</strong> Toggle categories (SEO, WCAG 2.2, Core Web Vitals, security posture…), pick a depth from focused to forensic, and watch the brief rebuild live.</li>
+      <li><strong>Hand it off.</strong> One click copies the prompt. Paste it into Arena Agent Mode and the multi-disciplinary audit starts with full context — no re-explaining.</li>
+    </ol>
+
+    <div class="callout">
+      <strong>Private by design.</strong> Everything runs in your browser. Files you drop are read
+      locally and never uploaded — only a compact evidence manifest (file names, sizes, detected
+      type) enters the prompt text itself. No cookies, no analytics, no accounts.
+    </div>
+
+    <h3>Frequently asked questions</h3>
+    <details>
+      <summary>Does Arena Audit run the audit itself?</summary>
+      <p>No — it builds the brief. The audit runs in your AI agent (e.g. Arena Agent Mode), which keeps your data local and your agent in control.</p>
+    </details>
+    <details>
+      <summary>Is it free?</summary>
+      <p>Yes. MIT-licensed, no account, no tracking.</p>
+    </details>
+    <details>
+      <summary>What can it audit?</summary>
+      <p>Websites and web apps, iOS/Android apps, desktop software, SaaS products, APIs, browser extensions, and local codebases via file drop.</p>
+    </details>
+    <details>
+      <summary>Why 15 categories?</summary>
+      <p>Each maps to a professional discipline (UX, brand, technical SEO, security…). Skipping categories produces faster, narrower briefs.</p>
+    </details>
+    <details>
+      <summary>Where do my files go?</summary>
+      <p>Nowhere. Processing is 100% client-side; only a manifest of names and sizes is embedded in the generated prompt.</p>
+    </details>
+  </section>
+
+  <footer class="site-footer">
+    <nav aria-label="Project links">
+      <a href="https://github.com/DLinacre/a-audit" target="_blank" rel="noopener">★ Star on GitHub</a>
+      <a href="https://arena.ai" target="_blank" rel="noopener">Open Agent Arena.AI Mode</a>
+      <a href="https://github.com/DLinacre/a-audit/issues/new" target="_blank" rel="noopener">Report an issue</a>
+      <a href="https://github.com/DLinacre/a-audit/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+      <a href="#about">About &amp; FAQ</a>
+    </nav>
+    <p class="fineprint">100% client-side — your targets, files and prompts never leave this browser.</p>
+  </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
 
@@ -2379,6 +2525,7 @@
     handoffNote.textContent = state.attachments.length
       ? `${state.attachments.length} local item(s) selected${localInference ? ` · ${TYPES[localInference.type].short} detection is ${localInference.confidence} confidence: ${localInference.reasons.join("; ")}` : " · no decisive type signal"}. Attach the original files separately for Agent edits.`
       : "No local evidence selected. A manifest can still record the current target and resolved type.";
+    syncShareUrl();
     persistSettings();
   }
 
@@ -2493,30 +2640,44 @@
     showToast._timer = setTimeout(() => t.classList.remove("show"), 2200);
   }
 
-  function showPostCopyModal() {
-    const existing = document.getElementById("postCopyModal");
-    if (existing) existing.remove();
+  let _lastInvoker = null;
 
-    const modal = document.createElement("div");
-    modal.id = "postCopyModal";
-    modal.className = "audit-modal-backdrop";
-    modal.innerHTML = `
-      <div class="audit-modal">
-        <h3 style="margin-bottom: 12px; font-size: 18px; color: var(--success); display: flex; align-items: center; gap: 8px;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Prompt Copied Successfully!
-        </h3>
-        <p style="color: var(--text-muted); font-size: 14px; line-height: 1.5; margin-bottom: 20px;">
-          Your production-grade multi-expert audit prompt is in your clipboard. Open <strong>Arena Agent Mode</strong>, start a new chat, and paste your prompt to execute the comprehensive audit.
-        </p>
-        <div style="display: flex; justify-content: flex-end; gap: 10px;">
-          <button type="button" id="closeModalBtn" style="background: var(--accent); color: white; border: none; padding: 8px 18px; border-radius: 8px; cursor: pointer; font-weight: 500;">Got it, thanks!</button>
-        </div>
+  function showPostCopyModal(invoker) {
+    _lastInvoker = invoker || document.activeElement;
+    document.getElementById("postCopyModal")?.remove();
+
+    const dialog = document.createElement("dialog");
+    dialog.id = "postCopyModal";
+    dialog.className = "audit-dialog";
+    dialog.setAttribute("aria-labelledby", "postCopyTitle");
+    dialog.innerHTML = `
+      <h3 id="postCopyTitle" style="margin-bottom: 12px; font-size: 18px; color: var(--success); display: flex; align-items: center; gap: 8px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        Prompt copied successfully
+      </h3>
+      <p style="color: var(--text-muted); font-size: 14px; line-height: 1.5; margin-bottom: 20px;">
+        Your production-grade multi-expert audit prompt is in your clipboard. Open
+        <a href="https://arena.ai" target="_blank" rel="noopener" style="color: var(--accent-hover);">Arena Agent Mode</a>,
+        start a new chat, and paste your prompt to execute the comprehensive audit.
+      </p>
+      <div style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button type="button" class="modal-cta" data-close>Got it, thanks!</button>
       </div>
     `;
-    document.body.appendChild(modal);
-    document.getElementById("closeModalBtn").onclick = () => modal.remove();
-    modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+    document.body.appendChild(dialog);
+
+    dialog.querySelector("[data-close]").addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (e) => {
+      const r = dialog.getBoundingClientRect();
+      const inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+      if (!inside) dialog.close();
+    });
+    dialog.addEventListener("close", () => {
+      dialog.remove();
+      if (_lastInvoker && typeof _lastInvoker.focus === "function") _lastInvoker.focus();
+    });
+
+    dialog.showModal();
   }
 
   const CUSTOM_PRESETS_KEY = "arena_audit_custom_presets_v1";
@@ -2599,13 +2760,19 @@
     reader.readAsText(file);
   }
 
-  function sendToArenaApi() {
-    const built = buildPrompt();
-    showToast("🚀 Connecting to Arena Agent API...");
-    setTimeout(() => {
-      showToast("✨ Audit prompt dispatched to Arena Agent Mode!");
-      showPostCopyModal();
-    }, 1200);
+  async function openInArena(btn) {
+    const raw = $("#promptOut").dataset.raw || buildPrompt().text;
+    btn.disabled = true;
+    try {
+      await navigator.clipboard.writeText(raw);
+      showToast("✓ Prompt copied — opening Arena.ai in a new tab…");
+      window.open("https://arena.ai", "_blank", "noopener");
+      showPostCopyModal(btn);
+    } catch {
+      showToast("Copy failed — use the Copy button, then paste into arena.ai");
+    } finally {
+      setTimeout(() => { btn.disabled = false; }, 1500);
+    }
   }
 
   async function copyPrompt() {
@@ -2683,13 +2850,60 @@
       shell.classList.add("mobile-view-controls");
       btnCtrl.classList.add("active");
       btnPrev.classList.remove("active");
+      btnCtrl.setAttribute("aria-selected", "true");
+      btnPrev.setAttribute("aria-selected", "false");
     } else {
       shell.classList.remove("mobile-view-controls");
       shell.classList.add("mobile-view-preview");
       btnPrev.classList.add("active");
       btnCtrl.classList.remove("active");
+      btnPrev.setAttribute("aria-selected", "true");
+      btnCtrl.setAttribute("aria-selected", "false");
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
+  }
+
+
+  /* ---- Shareable configuration URLs ---- */
+  const SHARE_KEYS = { target: "t", type: "y", depth: "d", style: "s", preset: "p" };
+
+  function syncShareUrl() {
+    try {
+      const p = new URLSearchParams();
+      const tv = cleanRaw($("#targetInput").value);
+      if (tv) p.set(SHARE_KEYS.target, tv);
+      if (state.typeManual && state.typeManual !== "auto") p.set(SHARE_KEYS.type, state.typeManual);
+      if (state.depth !== "full") p.set(SHARE_KEYS.depth, state.depth);
+      if (state.style !== "detailed") p.set(SHARE_KEYS.style, state.style);
+      if (state.preset && state.preset !== "master") p.set(SHARE_KEYS.preset, state.preset);
+      const off = Object.entries(state.cats).filter(([, v]) => !v).map(([k]) => k);
+      if (off.length) p.set("xc", off.join(","));
+      history.replaceState(null, "", p.toString() ? location.pathname + "#" + p : location.pathname);
+    } catch { /* sharing is non-essential */ }
+  }
+
+  function applySharedState() {
+    let p;
+    try { p = new URLSearchParams(location.hash.slice(1) || location.search.slice(1)); } catch { return; }
+    if (![...p.keys()].length) return;
+    let restored = false;
+    const t = p.get(SHARE_KEYS.target);
+    if (t && t.length <= 2000) { $("#targetInput").value = t; restored = true; }
+    const y = p.get(SHARE_KEYS.type);
+    if (y && TYPES[y]) { state.typeManual = y; $("#targetType").value = y; onTypeChange(y, { resetTouches: false }); restored = true; }
+    const d = p.get(SHARE_KEYS.depth);
+    if (["focused", "full", "forensic"].includes(d)) { state.depth = d; restored = true; }
+    const st = p.get(SHARE_KEYS.style);
+    if (["concise", "detailed", "agent"].includes(st)) { state.style = st; restored = true; }
+    const pr = p.get(SHARE_KEYS.preset);
+    if (pr) { state.preset = pr; }
+    const xc = p.get("xc");
+    if (xc) {
+      xc.split(",").filter(x => /^[a-z0-9_-]{1,40}$/i.test(x)).forEach(id => { if (id in state.cats) state.cats[id] = false; });
+      state.catsTouched = true;
+      restored = true;
+    }
+    if (restored) { update(); showToast("✓ Configuration restored from shared link"); }
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -2796,7 +3010,7 @@
     $("#btnSavePreset").onclick = saveCustomPreset;
     $("#btnExportPresets").onclick = exportCustomPresets;
     $("#importPresetsFile").onchange = importCustomPresets;
-    $("#btnSendApi").onclick = sendToArenaApi;
+    $("#btnSendApi").onclick = (e) => openInArena(e.currentTarget);
 
     ["targetInput", "productName", "market", "extraContext"].forEach(id => {
       $("#" + id).addEventListener("input", () => {
@@ -2836,6 +3050,10 @@
     $("#fileInput").addEventListener("change", e => analyseFiles(e.target.files));
     $("#folderInput").addEventListener("change", e => analyseFiles(e.target.files));
     uploadZone.addEventListener("click", e => { if (!e.target.closest("button")) $("#fileInput").click(); });
+    uploadZone.addEventListener("keydown", e => {
+      if (e.target !== uploadZone) return;
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("#fileInput").click(); }
+    });
     ["dragenter", "dragover"].forEach(ev => uploadZone.addEventListener(ev, e => { e.preventDefault(); uploadZone.classList.add("drag"); }));
     ["dragleave", "drop"].forEach(ev => uploadZone.addEventListener(ev, e => { e.preventDefault(); uploadZone.classList.remove("drag"); }));
     uploadZone.addEventListener("drop", async e => {
@@ -2862,6 +3080,17 @@
   }
 
   init();
+  applySharedState();
+  </script>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js", { scope: "./" }).catch(() => {
+          /* offline capability unavailable */
+        });
+      });
+    }
   </script>
 </body>
 </html>
