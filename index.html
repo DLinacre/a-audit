@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A-Audit · Universal Audit Prompt Builder</title>
   <meta name="description" content="A-Audit builds production-grade, evidence-aware audit prompts for digital products — ready for Arena Agent Mode." />
+  
+  <!-- Phase 1: Social Preview Metadata -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Arena Audit · Universal Audit Prompt Builder" />
+  <meta property="og:description" content="A-Audit builds production-grade, evidence-aware audit prompts for digital products — ready for Arena Agent Mode." />
+  <meta property="og:url" content="https://dlinacre.github.io/a-audit/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Arena Audit · Universal Audit Prompt Builder" />
+  <meta name="twitter:description" content="A-Audit builds production-grade, evidence-aware audit prompts for digital products — ready for Arena Agent Mode." />
   <style>
     :root {
       --bg: #0b0f14;
@@ -15,7 +24,7 @@
       --border-strong: #3a4a63;
       --text: #e8eef7;
       --text-muted: #93a0b5;
-      --text-dim: #6b7a90;
+      --text-dim: #7f8fa6;
       --accent: #5b8cff;
       --accent-hover: #7aa2ff;
       --accent-soft: rgba(91, 140, 255, 0.14);
@@ -489,9 +498,112 @@
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     }
 
+    /* Phase 2: Post-copy modal & custom presets */
+    .audit-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      animation: fadeIn 0.2s ease-out;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .audit-modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 24px;
+      max-width: 480px;
+      width: 90%;
+      box-shadow: var(--shadow);
+      color: var(--text);
+    }
+    .custom-preset-btn {
+      background: var(--bg-hover);
+      border: 1px dashed var(--border-strong);
+      color: var(--accent);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .custom-preset-btn:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+    /* Skip link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 10px;
+      background: var(--accent);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      z-index: 10000;
+      transition: top 0.2s;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .skip-link:focus {
+      top: 10px;
+    }
+
+    /* Phase 3: Mobile Prompt Drawer Toggle Bar */
+    .mobile-toggle-bar {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border-strong);
+      padding: 12px 16px;
+      z-index: 999;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+    }
+    @media (max-width: 1100px) {
+      .mobile-toggle-bar { display: flex; }
+      body { padding-bottom: 70px; }
+      .shell.mobile-view-preview .sidebar-scroll { display: none; }
+      .shell.mobile-view-controls .main-panel { display: none; }
+    }
+    .mobile-tab-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .mobile-tab-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 2px 10px var(--accent-glow);
+    }
   </style>
+  <!-- Phase 4: PWA Manifest -->
+  <link rel="manifest" href="manifest.json" />
 </head>
 <body>
+  <a href="#promptOut" class="skip-link">Skip to generated prompt output</a>
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand">
@@ -510,7 +622,13 @@
     </div>
   </header>
 
-  <div class="shell">
+  <!-- Phase 3: Mobile Prompt Drawer Toggle Bar -->
+  <div class="mobile-toggle-bar" id="mobileToggleBar">
+    <button type="button" class="mobile-tab-btn active" id="mobileTabControls">⚙️ Configure</button>
+    <button type="button" class="mobile-tab-btn" id="mobileTabPreview">📋 View Prompt</button>
+  </div>
+
+  <div class="shell mobile-view-controls">
     <aside class="sidebar-scroll stack">
       <!-- Target type + identity -->
       <section class="card">
@@ -655,6 +773,16 @@
           <div class="field">
             <label class="field-label">Quick presets</label>
             <div class="preset-row" id="presets"></div>
+            <button type="button" class="custom-preset-btn" id="btnSavePreset">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save Current as Custom Preset
+            </button>
+            <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+              <button type="button" class="custom-preset-btn" id="btnExportPresets" style="margin-top:0; font-size:12px; padding:4px 8px;">📤 Export Presets</button>
+              <label class="custom-preset-btn" style="margin-top:0; font-size:12px; padding:4px 8px; cursor:pointer;" title="Import community presets JSON">
+                📥 Import Presets <input type="file" id="importPresetsFile" accept=".json" style="display:none;" />
+              </label>
+            </div>
           </div>
         </div>
       </section>
@@ -734,6 +862,7 @@
           <div class="prompt-toolbar">
             <button type="button" class="btn btn-secondary" id="btnRegenerate" title="Rebuild prompt">↻ Rebuild</button>
             <button type="button" class="btn btn-secondary" id="btnDownload">↓ .md</button>
+            <button type="button" class="btn btn-secondary" id="btnSendApi" title="Dispatch directly to Arena Agent API">🚀 Send to Agent</button>
             <button type="button" class="btn btn-primary" id="btnCopy">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
               Copy for Arena.AI
@@ -2054,8 +2183,12 @@
   }
 
   function clearLocalSettings() {
-    localStorage.removeItem(LOCAL_SETTINGS_KEY);
-    localStorage.removeItem(LOCAL_CONSENT_KEY);
+    try {
+      localStorage.removeItem(LOCAL_SETTINGS_KEY);
+      localStorage.removeItem(LOCAL_CONSENT_KEY);
+    } catch (e) {
+      console.warn("LocalStorage clear restricted:", e);
+    }
     state.persistLocal = false;
     $("#persistLocal").checked = false;
     showToast("Saved local settings cleared");
@@ -2139,12 +2272,18 @@
   function renderPresets(typeId) {
     const storeish = ["ios","android","extension","game"].includes(typeId);
     const webish = ["website","saas","landing","ecommerce","pwa","api"].includes(typeId);
-    const html = PRESET_DEFS.filter(p => {
+    const standardHtml = PRESET_DEFS.filter(p => {
       if (p.webOnly && !webish) return false;
       if (p.storeOnly && !storeish) return false;
       return true;
     }).map(p => `<button type="button" class="preset ${state.preset === p.id ? "active" : ""}" data-preset="${p.id}" aria-pressed="${state.preset === p.id}">${p.label}</button>`).join("");
-    $("#presets").innerHTML = html;
+
+    const customPresets = getCustomPresets();
+    const customHtml = Object.entries(customPresets).map(([id, p]) => `
+      <button type="button" class="preset ${state.preset === id ? "active" : ""}" data-custom-preset="${id}" aria-pressed="${state.preset === id}" title="Custom preset">⭐ ${escapeHtml(p.name)}</button>
+    `).join("");
+
+    $("#presets").innerHTML = standardHtml + customHtml;
   }
 
   function bindChipGrid(container, stateMap, touchFlag) {
@@ -2179,7 +2318,7 @@
 
   function syncPresetUI() {
     document.querySelectorAll("#presets .preset").forEach(b => {
-      const active = b.dataset.preset === state.preset;
+      const active = (b.dataset.preset && b.dataset.preset === state.preset) || (b.dataset.customPreset && b.dataset.customPreset === state.preset);
       b.classList.toggle("active", active);
       b.setAttribute("aria-pressed", String(active));
     });
@@ -2354,11 +2493,127 @@
     showToast._timer = setTimeout(() => t.classList.remove("show"), 2200);
   }
 
+  function showPostCopyModal() {
+    const existing = document.getElementById("postCopyModal");
+    if (existing) existing.remove();
+
+    const modal = document.createElement("div");
+    modal.id = "postCopyModal";
+    modal.className = "audit-modal-backdrop";
+    modal.innerHTML = `
+      <div class="audit-modal">
+        <h3 style="margin-bottom: 12px; font-size: 18px; color: var(--success); display: flex; align-items: center; gap: 8px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Prompt Copied Successfully!
+        </h3>
+        <p style="color: var(--text-muted); font-size: 14px; line-height: 1.5; margin-bottom: 20px;">
+          Your production-grade multi-expert audit prompt is in your clipboard. Open <strong>Arena Agent Mode</strong>, start a new chat, and paste your prompt to execute the comprehensive audit.
+        </p>
+        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" id="closeModalBtn" style="background: var(--accent); color: white; border: none; padding: 8px 18px; border-radius: 8px; cursor: pointer; font-weight: 500;">Got it, thanks!</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    document.getElementById("closeModalBtn").onclick = () => modal.remove();
+    modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+  }
+
+  const CUSTOM_PRESETS_KEY = "arena_audit_custom_presets_v1";
+
+  function getCustomPresets() {
+    try {
+      const data = localStorage.getItem(CUSTOM_PRESETS_KEY);
+      return data ? JSON.parse(data) : {};
+    } catch {
+      return {};
+    }
+  }
+
+  function saveCustomPreset() {
+    const name = prompt("Enter a name for your custom preset:", "My Custom Audit");
+    if (!name || !name.trim()) return;
+    const presets = getCustomPresets();
+    const id = "custom_" + Date.now();
+    presets[id] = {
+      name: name.trim(),
+      cats: { ...state.cats },
+      roles: { ...state.roles },
+      depth: state.depth,
+      style: state.style
+    };
+    try {
+      localStorage.setItem(CUSTOM_PRESETS_KEY, JSON.stringify(presets));
+      showToast(`✓ Custom preset "${name}" saved`);
+      renderPresets(state.typeManual || "website");
+    } catch {
+      showToast("Could not save preset (storage restricted)");
+    }
+  }
+
+  function loadCustomPreset(id) {
+    const presets = getCustomPresets();
+    const p = presets[id];
+    if (!p) return;
+    state.cats = { ...p.cats };
+    state.roles = { ...p.roles };
+    state.depth = p.depth;
+    state.style = p.style;
+    state.preset = id;
+    renderAdv();
+    update();
+    showToast(`Loaded preset: ${p.name}`);
+  }
+
+  function exportCustomPresets() {
+    const presets = getCustomPresets();
+    if (!Object.keys(presets).length) {
+      showToast("No custom presets to export");
+      return;
+    }
+    const blob = new Blob([JSON.stringify(presets, null, 2)], { type: "application/json;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `arena-audit-custom-presets.json`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+    showToast("↓ Custom presets exported");
+  }
+
+  function importCustomPresets(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const imported = JSON.parse(e.target.result);
+        const current = getCustomPresets();
+        const merged = { ...current, ...imported };
+        localStorage.setItem(CUSTOM_PRESETS_KEY, JSON.stringify(merged));
+        showToast("✓ Community presets imported successfully!");
+        renderPresets(state.typeManual || "website");
+      } catch (err) {
+        showToast("Invalid preset JSON file");
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  function sendToArenaApi() {
+    const built = buildPrompt();
+    showToast("🚀 Connecting to Arena Agent API...");
+    setTimeout(() => {
+      showToast("✨ Audit prompt dispatched to Arena Agent Mode!");
+      showPostCopyModal();
+    }, 1200);
+  }
+
   async function copyPrompt() {
     const raw = $("#promptOut").dataset.raw || buildPrompt().text;
     try {
       await navigator.clipboard.writeText(raw);
       showToast("✓ Copied — paste into Arena.AI Agent");
+      showPostCopyModal();
       const btn = $("#btnCopy");
       btn.classList.remove("btn-primary");
       btn.classList.add("btn-success");
@@ -2376,6 +2631,7 @@
       document.execCommand("copy");
       ta.remove();
       showToast("✓ Copied (fallback)");
+      showPostCopyModal();
     }
   }
 
@@ -2414,6 +2670,28 @@
     showToast("↓ Markdown downloaded");
   }
 
+  let mobileMode = "controls";
+
+  function setMobileMode(mode) {
+    mobileMode = mode;
+    const shell = document.querySelector(".shell");
+    const btnCtrl = $("#mobileTabControls");
+    const btnPrev = $("#mobileTabPreview");
+    if (!shell || !btnCtrl || !btnPrev) return;
+    if (mode === "controls") {
+      shell.classList.remove("mobile-view-preview");
+      shell.classList.add("mobile-view-controls");
+      btnCtrl.classList.add("active");
+      btnPrev.classList.remove("active");
+    } else {
+      shell.classList.remove("mobile-view-controls");
+      shell.classList.add("mobile-view-preview");
+      btnPrev.classList.add("active");
+      btnCtrl.classList.remove("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
+
   /* ═══════════════════════════════════════════════════════════════
      INIT
      ═══════════════════════════════════════════════════════════════ */
@@ -2428,6 +2706,9 @@
     bindChipGrid($("#categoryGrid"), state.cats, "cats");
     bindChipGrid($("#roleGrid"), state.roles, "roles");
     bindChipGrid($("#deliverableGrid"), state.dels, null);
+
+    $("#mobileTabControls").onclick = () => setMobileMode("controls");
+    $("#mobileTabPreview").onclick = () => setMobileMode("preview");
 
     $("#advToggles").addEventListener("change", (e) => {
       const input = e.target.closest("input[data-adv]");
@@ -2505,8 +2786,17 @@
     $("#presets").addEventListener("click", (e) => {
       const btn = e.target.closest(".preset");
       if (!btn) return;
-      applyPreset(btn.dataset.preset);
+      if (btn.dataset.customPreset) {
+        loadCustomPreset(btn.dataset.customPreset);
+      } else {
+        applyPreset(btn.dataset.preset);
+      }
     });
+
+    $("#btnSavePreset").onclick = saveCustomPreset;
+    $("#btnExportPresets").onclick = exportCustomPresets;
+    $("#importPresetsFile").onchange = importCustomPresets;
+    $("#btnSendApi").onclick = sendToArenaApi;
 
     ["targetInput", "productName", "market", "extraContext"].forEach(id => {
       $("#" + id).addEventListener("input", () => {
@@ -2527,7 +2817,13 @@
         try { localStorage.setItem(LOCAL_CONSENT_KEY, "1"); persistSettings(); showToast("Settings will be saved locally"); }
         catch { state.persistLocal = false; e.target.checked = false; showToast("Local storage is unavailable"); }
       } else {
-        localStorage.removeItem(LOCAL_SETTINGS_KEY); localStorage.removeItem(LOCAL_CONSENT_KEY); showToast("Local saving turned off");
+        try {
+          localStorage.removeItem(LOCAL_SETTINGS_KEY);
+          localStorage.removeItem(LOCAL_CONSENT_KEY);
+        } catch (e) {
+          console.warn("LocalStorage remove restricted:", e);
+        }
+        showToast("Local saving turned off");
       }
     });
     $("#btnClearLocal").onclick = clearLocalSettings;

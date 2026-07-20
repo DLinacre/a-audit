@@ -1,0 +1,35 @@
+/* Accessibility & Focus Ring Enhancements */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Enhanced contrast for muted text */
+:root {
+  --text-dim: #7f8fa6;
+}
+
+/* Smooth modal styling for post-copy guidance */
+.audit-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.audit-modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  padding: 24px;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: var(--shadow);
+  color: var(--text);
+}
