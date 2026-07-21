@@ -1,3 +1,5 @@
+![a-audit Banner](assets/banner.png)
+
 # Arena Audit (a-audit) — Universal Audit Prompt Builder
 
 Production-grade, evidence-aware audit prompt generator for AI Agent Mode.
