@@ -264,6 +264,13 @@
     .resolve-box.show { display: block; }
     .resolve-box strong { color: #b6f0d2; }
 
+    .mode-card {
+      background: linear-gradient(135deg, rgba(91, 140, 255, 0.12), rgba(167, 139, 250, 0.12));
+      border-color: rgba(91, 140, 255, 0.35);
+    }
+    .mode-card-body { padding: 12px 14px; }
+    .mode-label { margin-bottom: 8px; }
+
     .seg {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
       background: var(--bg); border: 1px solid var(--border);
@@ -716,6 +723,7 @@
         </div>
       </div>
       <div class="top-actions">
+        <a href="https://github.com/DLinacre/Deasy" target="_blank" rel="noopener" class="pill" style="text-decoration: none; color: #a78bfa; border-color: rgba(167, 139, 250, 0.4);" title="Launch Deasy Continuous Command Suite">⚡ Launch <strong>Deasy Suite</strong></a>
         <div class="pill"><span class="dot"></span> Optimized for <strong>Arena Agent Mode</strong></div>
         <div class="pill">Type: <strong id="pillType">Auto</strong></div>
         <div class="pill">Chars: <strong id="charCount">0</strong></div>
@@ -733,9 +741,9 @@
   <div class="shell mobile-view-controls">
     <aside class="sidebar-scroll stack">
       <!-- Mode Switcher -->
-      <section class="card" style="background: linear-gradient(135deg, rgba(91, 140, 255, 0.12), rgba(167, 139, 250, 0.12)); border-color: rgba(91, 140, 255, 0.35);">
-        <div class="card-body" style="padding: 12px 14px;">
-          <label class="field-label" style="margin-bottom: 8px;">Builder Mode</label>
+      <section class="card mode-card">
+        <div class="card-body mode-card-body">
+          <label class="field-label mode-label">Builder Mode</label>
           <div class="seg" id="modeSeg" role="group" aria-label="Builder mode">
             <button type="button" class="seg-btn active" data-mode="audit" id="modeBtnAudit" aria-pressed="true">🔍 Audit Existing</button>
             <button type="button" class="seg-btn" data-mode="create" id="modeBtnCreate" aria-pressed="false">🚀 Create App</button>
