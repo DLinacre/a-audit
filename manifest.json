@@ -1,7 +1,7 @@
 {
-  "name": "Arena Audit",
-  "short_name": "Arena Audit",
-  "description": "Production-grade, evidence-aware audit prompts for AI Agent Mode.",
+  "name": "Arena Builder",
+  "short_name": "Arena Builder",
+  "description": "Production-grade audit prompts and complete app specifications for AI Agent Mode.",
   "id": "./",
   "start_url": "./",
   "scope": "./",
