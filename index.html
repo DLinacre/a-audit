@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arena Audit · Universal Audit Prompt Builder</title>
-  <meta name="description" content="Build production-grade, evidence-aware audit prompts for websites, apps, APIs and SaaS — 15 categories, 14 expert roles, 100% client-side. Ready for AI Agent Mode." />
+  <title>Arena Builder · Universal Audit & App Prompt Builder</title>
+  <meta name="description" content="Build production-grade audit prompts and complete app creation specifications for AI Agent Mode — 15 audit categories, 14 expert roles, idea-to-PRD app builder, 100% client-side." />
   <link rel="canonical" href="https://dlinacre.github.io/a-audit/" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; manifest-src 'self'; connect-src 'none'; worker-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'" />
@@ -13,31 +13,31 @@
   
   <!-- Social preview metadata -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Arena Audit · Universal Audit Prompt Builder" />
-  <meta property="og:description" content="A-Audit builds production-grade, evidence-aware audit prompts for digital products — ready for Arena Agent Mode." />
-  <meta property="og:site_name" content="Arena Audit" />
+  <meta property="og:title" content="Arena Builder · Universal Audit & App Prompt Builder" />
+  <meta property="og:description" content="Arena Builder generates production-grade audit prompts and complete app specifications for AI Agent Mode — 100% client-side." />
+  <meta property="og:site_name" content="Arena Builder" />
   <meta property="og:url" content="https://dlinacre.github.io/a-audit/" />
   <meta property="og:image" content="https://dlinacre.github.io/a-audit/assets/og-preview.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Arena Audit — dark interface preview with the generated multi-expert audit prompt" />
+  <meta property="og:image:alt" content="Arena Builder — dark interface preview with generated multi-expert audit and app builder prompts" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Arena Audit · Universal Audit Prompt Builder" />
-  <meta name="twitter:description" content="Production-grade, evidence-aware audit prompts for AI Agent Mode. 15 categories · 14 experts · 100% client-side." />
+  <meta name="twitter:title" content="Arena Builder · Universal Audit & App Prompt Builder" />
+  <meta name="twitter:description" content="Production-grade audit prompts and app specifications for AI Agent Mode. Audit existing products or build from scratch." />
   <meta name="twitter:image" content="https://dlinacre.github.io/a-audit/assets/og-preview.png" />
-  <meta name="twitter:image:alt" content="Arena Audit — evidence-aware audit prompt builder" />
+  <meta name="twitter:image:alt" content="Arena Builder — universal audit and app prompt builder" />
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Arena Audit",
-    "alternateName": "A-Audit",
+    "name": "Arena Builder",
+    "alternateName": "Arena Audit / App Builder",
     "operatingSystem": "Any (web browser)",
     "applicationCategory": "DeveloperApplication",
     "url": "https://dlinacre.github.io/a-audit/",
     "image": "https://dlinacre.github.io/a-audit/assets/og-preview.png",
-    "description": "Arena Audit builds production-grade, evidence-aware audit prompts for digital products — ready for AI Agent Mode. 15 audit categories, 14 expert roles, 100% client-side.",
+    "description": "Arena Builder creates production-grade audit prompts and complete app specifications for digital products — ready for AI Agent Mode. 100% client-side.",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
     "author": { "@type": "Person", "name": "David Linacre", "url": "https://github.com/DLinacre" },
     "license": "https://opensource.org/licenses/MIT",
@@ -699,8 +699,8 @@
       <div class="brand">
         <div class="brand-mark">A</div>
         <div>
-          <h1>A-Audit · Universal Audit Builder</h1>
-          <p>Evidence-aware prompts for websites, apps, APIs, SaaS &amp; more</p>
+          <h1>Arena Builder · AI Audit & App Prompt Suite</h1>
+          <p>Audit existing products or build new apps from scratch for AI Agent Mode</p>
         </div>
       </div>
       <div class="top-actions">
@@ -720,10 +720,21 @@
 
   <div class="shell mobile-view-controls">
     <aside class="sidebar-scroll stack">
-      <!-- Target type + identity -->
-      <section class="card">
+      <!-- Mode Switcher -->
+      <section class="card" style="background: linear-gradient(135deg, rgba(91, 140, 255, 0.12), rgba(167, 139, 250, 0.12)); border-color: rgba(91, 140, 255, 0.35);">
+        <div class="card-body" style="padding: 12px 14px;">
+          <label class="field-label" style="margin-bottom: 8px;">Builder Mode</label>
+          <div class="seg" id="modeSeg" role="group" aria-label="Builder mode">
+            <button type="button" class="seg-btn active" data-mode="audit" id="modeBtnAudit" aria-pressed="true">🔍 Audit Existing</button>
+            <button type="button" class="seg-btn" data-mode="create" id="modeBtnCreate" aria-pressed="false">🚀 Create App</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Target type + identity (Audit Existing Mode) -->
+      <section class="card" id="auditTargetCard">
         <div class="card-head">
-          <h2><span class="icon">🎯</span> Target</h2>
+          <h2><span class="icon">🎯</span> Audit Target</h2>
         </div>
         <div class="card-body">
           <div class="field">
@@ -794,7 +805,7 @@
           <div class="row-2" style="margin-top: 12px;">
             <div class="field">
               <label class="field-label" for="productName">Product / brand name</label>
-              <input id="productName" class="input" type="text" value="Linacre" placeholder="Auto from target if empty" />
+              <input id="productName" class="input" type="text" value="" placeholder="Auto from target if empty" />
             </div>
             <div class="field">
               <label class="field-label" for="market">Market / niche</label>
@@ -831,6 +842,73 @@
           </details>
 
           <div class="resolve-box" id="resolveBox"></div>
+        </div>
+      </section>
+
+      <!-- Create App Specification Card (shown when mode == 'create') -->
+      <section class="card" id="createAppCard" style="display: none;">
+        <div class="card-head">
+          <h2><span class="icon">🚀</span> Create App Specification</h2>
+        </div>
+        <div class="card-body">
+          <div class="field">
+            <label class="field-label" for="createAppName">App / project title</label>
+            <input id="createAppName" class="input" type="text" value="" placeholder="e.g. Nexus Analytics" />
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="createAppVision">Product vision / elevator pitch</label>
+            <textarea id="createAppVision" class="textarea" rows="3" placeholder="Describe what the app does, target value prop, and key functionality..."></textarea>
+          </div>
+
+          <div class="row-2">
+            <div class="field">
+              <label class="field-label" for="createPlatform">Target platform</label>
+              <select id="createPlatform" class="select" aria-label="Target platform">
+                <option value="webapp">🌐 Web App / SaaS</option>
+                <option value="mobile">📱 Mobile App (iOS & Android)</option>
+                <option value="cli">💻 CLI Tool / Developer Utility</option>
+                <option value="desktop">🖥️ Desktop App (Electron/Tauri)</option>
+                <option value="extension">🧩 Browser Extension</option>
+                <option value="api">🔌 API / Backend Service</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label" for="createArchitecture">Architecture style</label>
+              <select id="createArchitecture" class="select" aria-label="Architecture style">
+                <option value="monolith">📦 Modular Monolith</option>
+                <option value="microservices">🧩 Microservices</option>
+                <option value="serverless">⚡ Serverless & Edge</option>
+                <option value="jamstack">🚀 Jamstack Static + API</option>
+                <option value="event">🔄 Event-Driven</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="createTechStack">Preferred tech stack</label>
+            <input id="createTechStack" class="input" type="text" value="" placeholder="e.g. Next.js 15, TypeScript, TailwindCSS, FastAPI, PostgreSQL, Supabase" />
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="createCoreFeatures">Core feature backlog / requirements</label>
+            <textarea id="createCoreFeatures" class="textarea" rows="4" placeholder="1. User authentication & workspace management&#10;2. Real-time metrics dashboard&#10;3. Automated PDF export & email alerts"></textarea>
+          </div>
+
+          <div class="row-2">
+            <div class="field">
+              <label class="field-label" for="createAudience">Target audience</label>
+              <input id="createAudience" class="input" type="text" value="" placeholder="e.g. Indie hackers, financial analysts" />
+            </div>
+            <div class="field">
+              <label class="field-label" for="createScope">MVP target scope</label>
+              <select id="createScope" class="select" aria-label="MVP target scope">
+                <option value="mvp">🚀 Single-Page Core MVP</option>
+                <option value="full">🏢 Full-Stack Core Product MVP</option>
+                <option value="enterprise">🏛️ Enterprise System Specification</option>
+              </select>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1490,6 +1568,7 @@
      STATE
      ═══════════════════════════════════════════════════════════════ */
   const state = {
+    appMode: "audit",
     depth: "full",
     style: "detailed",
     preset: "master",
@@ -1985,6 +2064,67 @@
   }
 
   function buildPrompt() {
+    if (state.appMode === "create") {
+      const appName = cleanRaw($("#createAppName")?.value) || "New Digital App";
+      const appVision = cleanRaw($("#createAppVision")?.value) || "Build a modern, scalable, high-performance digital product.";
+      const platform = $("#createPlatform")?.value || "webapp";
+      const arch = $("#createArchitecture")?.value || "monolith";
+      const stack = cleanRaw($("#createTechStack")?.value) || "Modern Web Stack (HTML5/CSS3/JavaScript, Node.js or Python backend)";
+      const features = cleanRaw($("#createCoreFeatures")?.value) || "1. User onboarding & authentication\n2. Primary dashboard & core workflow\n3. Settings & data management";
+      const audience = cleanRaw($("#createAudience")?.value) || "General digital users and professionals";
+      const scope = $("#createScope")?.value || "mvp";
+      const scopeLabel = { mvp: "Single-Page Core MVP", full: "Full-Stack Core Product MVP", enterprise: "Enterprise System Specification" }[scope];
+
+      const lines = [
+        `# MASTER SOFTWARE ARCHITECT & PRODUCT CREATION CONSULTANT`,
+        ``,
+        `**Product Name:** 🚀 ${appName}`,
+        `**Target Platform:** ${platform.toUpperCase()}`,
+        `**Preferred Tech Stack:** ${stack}`,
+        `**Architecture Style:** ${arch}`,
+        `**MVP Target Scope:** ${scopeLabel}`,
+        `**Target Audience:** ${audience}`,
+        `**Date context:** Build according to current production software standards.`,
+        ``,
+        `---`,
+        ``,
+        `## Mission`,
+        `Act as a Principal Systems Architect, Lead UX/UI Designer, and Staff Software Engineer to build **${appName}** from scratch.`,
+        ``,
+        `## Product Vision & Pitch`,
+        appVision,
+        ``,
+        `## Core Feature Backlog`,
+        features,
+        ``,
+        `## Required Engineering Deliverables`,
+        `- **1. Product Requirements Document (PRD):** Comprehensive breakdown of user personas, core journeys, and functional specs.`,
+        `- **2. System Architecture & Folder Tree:** Canonical project structure, dependency manifest, and module boundaries.`,
+        `- **3. Database Schema & Data Models:** Complete entity-relationship diagram / SQL schema definitions.`,
+        `- **4. API & Interface Specifications:** Endpoints, request/response formats, state management, and UI component hierarchy.`,
+        `- **5. Security, Auth & Quality Standards:** Input validation, secret distribution, access control, and testing strategy.`,
+        `- **6. Step-by-Step Implementation Execution Plan:** Phase 1 (Core Foundation) → Phase 2 (Feature Implementation) → Phase 3 (Polish & Deployment).`,
+        ``,
+        `## Execution & Code Generation Rules`,
+        `- Produce production-grade, self-contained, working code files without placeholders or omitted methods.`,
+        `- Follow modular, clean code principles with comprehensive inline documentation.`,
+        `- Write complete files directly to the workspace structure when instructed.`,
+        ``,
+        `Begin architecting and constructing **${appName}** now.`
+      ];
+
+      return {
+        text: lines.join("\n"),
+        resolved: { source: "manual", type: platform },
+        target: { display: appName, slug: appName.toLowerCase().replace(/[^a-z0-9]+/g, "-") },
+        typeId: platform,
+        name: appName,
+        cats: [{ id: "prd", name: "PRD & Vision" }, { id: "arch", name: "Architecture" }, { id: "db", name: "Data Schema" }, { id: "api", name: "API & UI Specs" }, { id: "plan", name: "Implementation Plan" }],
+        roles: [{ id: "arch", name: "Principal Architect" }, { id: "eng", name: "Lead Software Engineer" }, { id: "designer", name: "Lead UX/UI Designer" }, { id: "sec", name: "Security Engineer" }],
+        failSafeNotes: []
+      };
+    }
+
     const resolved = resolveType();
     const typeId = resolved.type;
     const t = TYPES[typeId] || TYPES.generic;
@@ -2923,6 +3063,31 @@
 
     $("#mobileTabControls").onclick = () => setMobileMode("controls");
     $("#mobileTabPreview").onclick = () => setMobileMode("preview");
+
+    $("#modeSeg")?.addEventListener("click", (e) => {
+      const btn = e.target.closest(".seg-btn");
+      if (!btn) return;
+      state.appMode = btn.dataset.mode;
+      document.querySelectorAll("#modeSeg .seg-btn").forEach(b => {
+        const active = b === btn;
+        b.classList.toggle("active", active);
+        b.setAttribute("aria-pressed", String(active));
+      });
+      const isCreate = state.appMode === "create";
+      const auditCard = $("#auditTargetCard");
+      const createCard = $("#createAppCard");
+      if (auditCard) auditCard.style.display = isCreate ? "none" : "block";
+      if (createCard) createCard.style.display = isCreate ? "block" : "none";
+      update();
+    });
+
+    ["createAppName", "createAppVision", "createPlatform", "createArchitecture", "createTechStack", "createCoreFeatures", "createAudience", "createScope"].forEach(id => {
+      const el = $("#" + id);
+      if (el) {
+        el.addEventListener("input", update);
+        el.addEventListener("change", update);
+      }
+    });
 
     $("#advToggles").addEventListener("change", (e) => {
       const input = e.target.closest("input[data-adv]");
