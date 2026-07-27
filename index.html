@@ -98,6 +98,7 @@
 
     .topbar {
       position: sticky; top: 0; z-index: 50;
+      -webkit-backdrop-filter: blur(16px);
       backdrop-filter: blur(16px);
       background: rgba(11, 15, 20, 0.82);
       border-bottom: 1px solid var(--border);
@@ -176,6 +177,7 @@
       outline: none; transition: border-color 0.15s, box-shadow 0.15s;
     }
     .select {
+      -webkit-appearance: none;
       appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2393a0b5' d='M1.4.6 6 5.2 10.6.6 12 2 6 8 0 2z'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
@@ -199,7 +201,7 @@
     .url-prefix {
       padding: 11px 12px; background: var(--bg-elevated); color: var(--text-dim);
       font-size: 0.82rem; border-right: 1px solid var(--border);
-      user-select: none; white-space: nowrap; min-width: 72px; text-align: center;
+      -webkit-user-select: none; user-select: none; white-space: nowrap; min-width: 72px; text-align: center;
     }
     .url-wrap .input { border: none; border-radius: 0; box-shadow: none; }
     .url-wrap .input:focus { box-shadow: none; }
@@ -215,6 +217,7 @@
       width: 100%; background: var(--bg); border: 1px solid var(--border);
       border-radius: var(--radius-sm); padding: 12px 40px 12px 14px;
       outline: none; cursor: pointer; font-weight: 650; font-size: 0.92rem;
+      -webkit-appearance: none;
       appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%237aa2ff' d='M1.4.6 6 5.2 10.6.6 12 2 6 8 0 2z'/%3E%3C/svg%3E");
       background-repeat: no-repeat; background-position: right 14px center;
@@ -267,6 +270,7 @@
       border-radius: var(--radius-sm); padding: 5px;
     }
     .seg-btn {
+      -webkit-appearance: none;
       appearance: none; border: none; background: transparent;
       color: var(--text-muted); padding: 9px 8px; border-radius: 8px;
       cursor: pointer; font-size: 0.82rem; font-weight: 600; transition: 0.15s ease;
@@ -279,6 +283,7 @@
 
     .section-tools { display: flex; gap: 8px; flex-wrap: wrap; }
     .mini-btn {
+      -webkit-appearance: none;
       appearance: none; border: 1px solid var(--border); background: var(--bg);
       color: var(--text-muted); padding: 5px 10px; border-radius: 999px;
       font-size: 0.72rem; font-weight: 600; cursor: pointer; transition: 0.15s ease;
@@ -292,7 +297,8 @@
       display: flex; align-items: flex-start; gap: 11px;
       padding: 11px 12px; border-radius: var(--radius-sm);
       border: 1px solid var(--border); background: var(--bg);
-      cursor: pointer; transition: 0.15s ease; user-select: none;
+      cursor: pointer; transition: 0.15s ease;
+      -webkit-user-select: none; user-select: none;
     }
     .chip:hover { border-color: var(--border-strong); background: var(--bg-hover); }
     .chip.on {
@@ -456,7 +462,8 @@
     details.adv summary {
       cursor: pointer; padding: 11px 13px; font-size: 0.82rem; font-weight: 650;
       color: var(--text-muted); list-style: none;
-      display: flex; align-items: center; justify-content: space-between; user-select: none;
+      display: flex; align-items: center; justify-content: space-between;
+      -webkit-user-select: none; user-select: none;
     }
     details.adv summary::-webkit-details-marker { display: none; }
     details.adv summary::after { content: "▸"; color: var(--text-dim); transition: transform 0.15s; }
@@ -536,6 +543,7 @@
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.75);
+      -webkit-backdrop-filter: blur(6px);
       backdrop-filter: blur(6px);
       display: flex;
       align-items: center;
@@ -649,7 +657,11 @@
       border: 1px solid var(--border-strong); border-radius: var(--radius);
       padding: 24px; max-width: 420px; box-shadow: var(--shadow);
     }
-    dialog.audit-dialog::backdrop { background: rgba(4, 8, 14, 0.6); backdrop-filter: blur(4px); }
+    dialog.audit-dialog::backdrop {
+      background: rgba(4, 8, 14, 0.6);
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
+    }
     .modal-cta {
       background: #3b6fe0; color: #fff; border: none;
       padding: 8px 18px; border-radius: 8px; cursor: pointer; font-weight: 500;
