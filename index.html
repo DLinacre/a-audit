@@ -745,8 +745,9 @@
         <div class="card-body mode-card-body">
           <label class="field-label mode-label">Builder Mode</label>
           <div class="seg" id="modeSeg" role="group" aria-label="Builder mode">
-            <button type="button" class="seg-btn active" data-mode="audit" id="modeBtnAudit" aria-pressed="true">🔍 Audit Existing</button>
+            <button type="button" class="seg-btn active" data-mode="audit" id="modeBtnAudit" aria-pressed="true">🔍 Audit</button>
             <button type="button" class="seg-btn" data-mode="create" id="modeBtnCreate" aria-pressed="false">🚀 Create App</button>
+            <button type="button" class="seg-btn" data-mode="refactor" id="modeBtnRefactor" aria-pressed="false">⚡ Refactor</button>
           </div>
         </div>
       </section>
@@ -928,6 +929,30 @@
                 <option value="enterprise">🏛️ Enterprise System Specification</option>
               </select>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Refactor & Modernize Specification Card (Refactor Mode) -->
+      <section class="card" id="refactorTargetCard" style="display: none;">
+        <div class="card-head">
+          <h2><span class="icon">⚡</span> Refactor & Modernize Scope</h2>
+        </div>
+        <div class="card-body">
+          <div class="field">
+            <label class="field-label" for="refactorScopeInput">Target Component / File Scope</label>
+            <input id="refactorScopeInput" class="input" type="text" value="" placeholder="e.g. src/components/LegacyRouter.tsx, server.js, or Entire App" />
+            <p class="hint">Specify the file path, component module, or subsystem to refactor.</p>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="refactorTechDebtInput">Current Pain Points & Tech Debt</label>
+            <textarea id="refactorTechDebtInput" class="textarea" rows="3" placeholder="e.g. Memory leaks, deprecated API methods, slow rendering, unhandled promise rejections, lack of TypeScript types..."></textarea>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="refactorTargetStackInput">Desired Target Stack & Architecture</label>
+            <input id="refactorTargetStackInput" class="input" type="text" value="" placeholder="e.g. TypeScript + React 19 + Tailwind v4 + Vitest + Clean Modular Architecture" />
           </div>
         </div>
       </section>
@@ -2145,6 +2170,52 @@
       };
     }
 
+    if (state.appMode === "refactor") {
+      const scope = cleanRaw($("#refactorScopeInput")?.value) || "Entire Application / Core Modules";
+      const techDebt = cleanRaw($("#refactorTechDebtInput")?.value) || "Legacy code patterns, technical debt, unhandled errors, and performance bottlenecks.";
+      const targetStack = cleanRaw($("#refactorTargetStackInput")?.value) || "TypeScript + React 19 + Tailwind v4 + Clean Modular Architecture";
+
+      const lines = [
+        `# REFACTORING & CODE MODERNIZATION DIRECTIVE`,
+        ``,
+        `**Mode:** ⚡ Refactor & Modernize`,
+        `**Target Scope:** ${scope}`,
+        `**Target Architecture / Stack:** ${targetStack}`,
+        `**Date Context:** ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`,
+        ``,
+        `---`,
+        ``,
+        `## 1. Technical Debt & Current Pain Points`,
+        techDebt,
+        ``,
+        `## 2. Refactoring Objectives & Quality Standards`,
+        `- **Modernize Code Base:** Convert legacy code patterns to clean, idiomatic ${targetStack}.`,
+        `- **Eliminate Tech Debt:** Fix memory leaks, unhandled exceptions, circular dependencies, and anti-patterns.`,
+        `- **Preserve API & Behavioral Contracts:** Ensure zero breaking changes to public function signatures, external APIs, or user-facing behavior.`,
+        `- **Enhance Performance & Stability:** Optimize memory usage, minimize CPU overhead, reduce bundle size, and improve load times.`,
+        `- **Type Safety & Testing:** Introduce strict TypeScript interfaces and establish unit test verification.`,
+        ``,
+        `## 3. Step-by-Step Refactoring Plan`,
+        `1. **Audit & Analysis Phase:** Map current dependencies, identify side-effects, and isolate unit bounds.`,
+        `2. **Interface & Contract Definition:** Establish clean TypeScript interfaces and typed state contracts.`,
+        `3. **Incremental Refactoring:** Transform components/modules one section at a time, preserving backwards compatibility.`,
+        `4. **Verification & Regression Testing:** Execute unit/integration tests and inspect logs to guarantee zero regressions.`,
+        ``,
+        `Begin refactoring and modernizing **${scope}** now.`
+      ];
+
+      return {
+        text: lines.join("\n"),
+        resolved: { source: "manual", type: "refactor" },
+        target: { display: scope, slug: scope.toLowerCase().replace(/[^a-z0-9]+/g, "-") },
+        typeId: "refactor",
+        name: scope,
+        cats: [{ id: "refactor", name: "Refactor Scope" }, { id: "techdebt", name: "Tech Debt" }],
+        roles: [{ id: "arch", name: "Refactoring Architect" }, { id: "dev", name: "Senior Developer" }],
+        failSafeNotes: []
+      };
+    }
+
     const resolved = resolveType();
     const typeId = resolved.type;
     const t = TYPES[typeId] || TYPES.generic;
@@ -3094,14 +3165,17 @@
         b.setAttribute("aria-pressed", String(active));
       });
       const isCreate = state.appMode === "create";
+      const isRefactor = state.appMode === "refactor";
       const auditCard = $("#auditTargetCard");
       const createCard = $("#createAppCard");
-      if (auditCard) auditCard.style.display = isCreate ? "none" : "block";
+      const refactorCard = $("#refactorTargetCard");
+      if (auditCard) auditCard.style.display = (isCreate || isRefactor) ? "none" : "block";
       if (createCard) createCard.style.display = isCreate ? "block" : "none";
+      if (refactorCard) refactorCard.style.display = isRefactor ? "block" : "none";
       update();
     });
 
-    ["createAppName", "createAppVision", "createPlatform", "createArchitecture", "createTechStack", "createCoreFeatures", "createAudience", "createScope"].forEach(id => {
+    ["createAppName", "createAppVision", "createPlatform", "createArchitecture", "createTechStack", "createCoreFeatures", "createAudience", "createScope", "refactorScopeInput", "refactorTechDebtInput", "refactorTargetStackInput"].forEach(id => {
       const el = $("#" + id);
       if (el) {
         el.addEventListener("input", update);
