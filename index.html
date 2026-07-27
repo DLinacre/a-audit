@@ -629,6 +629,12 @@
     .is-hidden {
       display: none;
     }
+    .pt-12 {
+      padding-top: 12px;
+    }
+    .mt-14 {
+      margin-top: 14px;
+    }
     /* Skip link for accessibility */
     .skip-link {
       position: absolute;
@@ -748,10 +754,6 @@
     .about summary:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 2px; }
     .about details p { margin: 8px 0 0; }
   </style>
-  <!-- Icons & PWA manifest -->
-  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="assets/icon-192.png" />
-  <link rel="manifest" href="manifest.json" />
 </head>
 <body>
   <a href="#promptOut" class="skip-link">Skip to generated prompt output</a>
@@ -1124,7 +1126,7 @@
             </button>
           </div>
         </div>
-        <div class="card-body" style="padding-top: 12px;">
+        <div class="card-body pt-12">
           <div class="prompt-box">
             <div class="prompt-meta">
               <div class="left">
@@ -1152,7 +1154,7 @@
             <p class="handoff-note" id="handoffNote">No local evidence selected. A manifest can still record the current target and resolved type.</p>
           </section>
 
-          <div class="foot-note" style="margin-top: 14px;">
+          <div class="foot-note mt-14">
             <strong>How to use:</strong> Pick a type (or leave <strong>Auto-detect</strong>) → paste a site, store URL, package id, APK/EXE name, or app name →
             toggle categories/bugs if you want → <strong>Copy for Arena.AI</strong>.
             Missing fields are filled with smart defaults so the prompt always stays complete and agent-ready.
