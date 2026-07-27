@@ -597,6 +597,31 @@
       background: var(--accent-soft);
       border-color: var(--accent);
     }
+    .preset-tools-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .mini-preset-btn {
+      margin-top: 0;
+      font-size: 12px;
+      padding: 4px 8px;
+    }
+    .mini-preset-label {
+      margin-top: 0;
+      font-size: 12px;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+    .hidden-input {
+      display: none;
+    }
+    .pill-deasy {
+      text-decoration: none;
+      color: #a78bfa;
+      border-color: rgba(167, 139, 250, 0.4);
+    }
     /* Skip link for accessibility */
     .skip-link {
       position: absolute;
@@ -733,7 +758,7 @@
         </div>
       </div>
       <div class="top-actions">
-        <a href="https://github.com/DLinacre/Deasy" target="_blank" rel="noopener" class="pill" style="text-decoration: none; color: #a78bfa; border-color: rgba(167, 139, 250, 0.4);" title="Launch Deasy Continuous Command Suite">⚡ Launch <strong>Deasy Suite</strong></a>
+        <a href="https://github.com/DLinacre/Deasy" target="_blank" rel="noopener" class="pill pill-deasy" title="Launch Deasy Continuous Command Suite">⚡ Launch <strong>Deasy Suite</strong></a>
         <div class="pill"><span class="dot"></span> Optimized for <strong>Arena Agent Mode</strong></div>
         <div class="pill">Type: <strong id="pillType">Auto</strong></div>
         <div class="pill">Chars: <strong id="charCount">0</strong></div>
@@ -1000,10 +1025,10 @@
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
               Save Current as Custom Preset
             </button>
-            <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
-              <button type="button" class="custom-preset-btn" id="btnExportPresets" style="margin-top:0; font-size:12px; padding:4px 8px;">📤 Export Presets</button>
-              <label class="custom-preset-btn" style="margin-top:0; font-size:12px; padding:4px 8px; cursor:pointer;" title="Import community presets JSON">
-                📥 Import Presets <input type="file" id="importPresetsFile" accept=".json" style="display:none;" />
+            <div class="preset-tools-row">
+              <button type="button" class="custom-preset-btn mini-preset-btn" id="btnExportPresets">📤 Export Presets</button>
+              <label class="custom-preset-btn mini-preset-label" title="Import community presets JSON">
+                📥 Import Presets <input type="file" id="importPresetsFile" accept=".json" class="hidden-input" />
               </label>
             </div>
           </div>
