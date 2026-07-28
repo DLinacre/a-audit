@@ -41,6 +41,7 @@ describe('Arena Builder React 19 UI Regression Suite', () => {
   it('displays the live markdown prompt preview with action buttons', () => {
     render(<App />);
 
+    expect(screen.getByText(/SEND TO ARENA\.AI AGENT/i)).toBeInTheDocument();
     expect(screen.getByText(/COPY PROMPT/i)).toBeInTheDocument();
     expect(screen.getByTitle(/Download Prompt as .md/i)).toBeInTheDocument();
     expect(screen.getByText(/MASTER WEBSITE AUDIT & GROWTH CONSULTANT/i)).toBeInTheDocument();

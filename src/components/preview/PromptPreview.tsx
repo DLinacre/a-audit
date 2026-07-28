@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { PromptResult, BuilderState } from '../../types';
 import { TYPES } from '../../domain/constants';
-import { Copy, Download, Check, FileArchive } from 'lucide-react';
+import { Copy, Download, Check, FileArchive, Sparkles, ExternalLink } from 'lucide-react';
 
 interface PromptPreviewProps {
   promptResult: PromptResult;
@@ -28,6 +28,20 @@ export const PromptPreview: React.FC<PromptPreviewProps> = ({
     } catch {
       // Fallback copy
     }
+  };
+
+  const handleSendToArenaAgent = async () => {
+    try {
+      await navigator.clipboard.writeText(promptResult.text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      // Fallback if clipboard denied
+    }
+    const targetUrl = `https://arena.ai/agent?prompt=${encodeURIComponent(
+      promptResult.text
+    )}`;
+    window.open(targetUrl, '_blank', 'noopener,noreferrer');
   };
 
   const handleDownloadMd = () => {
@@ -93,7 +107,18 @@ export const PromptPreview: React.FC<PromptPreviewProps> = ({
         </div>
 
         {/* Action Toolbar */}
-        <div className="flex items-center space-x-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={handleSendToArenaAgent}
+            className="px-4 py-1.5 rounded text-xs font-bold transition-all flex items-center space-x-1.5 bg-gradient-to-r from-[#a78bfa] via-[#5b8cff] to-[#22d3ee] hover:brightness-110 text-[#0b0f14] shadow-[0_0_14px_rgba(91,140,255,0.45)]"
+            title="Open in Arena.ai Agent Mode with prompt automatically loaded & copied"
+          >
+            <Sparkles className="w-4 h-4 text-[#0b0f14]" />
+            <span>SEND TO ARENA.AI AGENT</span>
+            <ExternalLink className="w-3.5 h-3.5 text-[#0b0f14] opacity-80" />
+          </button>
+
           <button
             type="button"
             onClick={handleCopy}

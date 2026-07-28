@@ -36,6 +36,7 @@ A primary directive standard was ensuring **zero breaking changes** to public fu
 | **Presets Import / Export & Storage** | 10 built-in presets + LocalStorage custom presets. | Backwards-compatible `src/domain/services/preset.service.ts` supporting built-in presets, LocalStorage saving/deleting, and `.json` file import/export. | ✅ 100% Verified in `preset.service.test.ts` |
 | **SEO, OpenGraph, Schema.org & PWA** | Inline metadata in `<head>`, plus `manifest.json`, `robots.txt`, `sitemap.xml`, and `sw.js`. | Included in `/index.html` and `/public/` directory; zero loss of SEO or offline PWA capabilities. | ✅ 100% Verified in Production Build |
 | **Bug Fix: Reverse-TLD Package Regex** | `app.example.com` falsely detected as Android APK package name. | Improved regex to require valid reverse-TLD package prefixes (`^(com|org|net|io|gov|edu|uk|de|fr|us)\.[a-z0-9_]+(\.[a-z0-9_]+)+$/i`). | ✅ Verified & Tested in `type-detector.test.ts` |
+| **World-Class AI Agent Integration** | None | Added prominent **SEND TO ARENA.AI AGENT** button in preview toolbar (`https://arena.ai/agent?prompt=...`) with automatic clipboard copying and clean dark developer banner. | ✅ Verified & Deployed |
 
 ---
 

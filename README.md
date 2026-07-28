@@ -33,6 +33,7 @@ Under the **Refactoring & Code Modernization Directive (July 28, 2026)**, **Aren
 4. **Automated Regression Verification (`src/tests/`):** Established a Vitest + `@testing-library/react` 20-test suite covering Audit mode, Create App mode, Refactor mode, file-type inference, subdomain vs reverse-TLD package detection, shareable URL query syncing, and UI mode switching.
 5. **Zero-Vulnerability Security Posture & Accessibility:** Upgraded dependencies to eliminate VM Context Escape CVEs (`0 vulnerabilities` in `npm audit`), enhanced reverse-TLD package regex matching (`com.company.app`), and added a WCAG 2.2 AA compliant Skip-to-Main-Content keyboard link.
 6. **Offline-First Service Worker (`sw.js`):** Continues to support zero-network local file inspection and offline prompt generation.
+7. **World-Class AI Agent Integration (`SEND TO ARENA.AI AGENT`):** One-click prominent button in the prompt toolbar opens `https://arena.ai/agent` with the generated prompt preloaded in the query string (`?prompt=...`) while automatically copying the markdown to the clipboard for zero-friction execution.
 
 ---
 
