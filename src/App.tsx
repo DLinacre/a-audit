@@ -71,7 +71,7 @@ export function App() {
       />
 
       {/* Main Responsive Grid Layout */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+      <main id="main-content" className="flex-1 w-full max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
         {/* Left Configuration Sidebar */}
         <div
           className={`md:col-span-6 lg:col-span-5 ${

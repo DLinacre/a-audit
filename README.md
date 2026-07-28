@@ -30,8 +30,9 @@ Under the **Refactoring & Code Modernization Directive (July 28, 2026)**, **Aren
    - Isolate file-type inference and local evidence manifest analysis in `src/domain/fileIntel.ts`.
    - Created a 100% pure, deterministic prompt builder engine (`src/domain/promptBuilder.ts`) with zero DOM side-effects and zero global mutable variables.
 3. **Strict Type Safety (`src/types/index.ts`):** Replaced implicit `any` types and DOM lookups with strict TypeScript interfaces for `BuilderState`, `TargetTypeId`, `AppMode`, `ResolvedType`, and `PromptResult`.
-4. **Automated Regression Verification (`src/tests/`):** Established a Vitest + `@testing-library/react` unit and integration test suite covering Audit mode, Create App mode, Refactor mode, file-type inference, and UI mode switching.
-5. **Offline-First Service Worker (`sw.js`):** Continues to support zero-network local file inspection and offline prompt generation.
+4. **Automated Regression Verification (`src/tests/`):** Established a Vitest + `@testing-library/react` 20-test suite covering Audit mode, Create App mode, Refactor mode, file-type inference, subdomain vs reverse-TLD package detection, shareable URL query syncing, and UI mode switching.
+5. **Zero-Vulnerability Security Posture & Accessibility:** Upgraded dependencies to eliminate VM Context Escape CVEs (`0 vulnerabilities` in `npm audit`), enhanced reverse-TLD package regex matching (`com.company.app`), and added a WCAG 2.2 AA compliant Skip-to-Main-Content keyboard link.
+6. **Offline-First Service Worker (`sw.js`):** Continues to support zero-network local file inspection and offline prompt generation.
 
 ---
 
@@ -69,6 +70,8 @@ a-audit/
 │   │       └── PromptPreview.tsx        # Live Markdown display, Copy, Download MD & Manifest
 │   ├── tests/
 │   │   ├── promptBuilder.test.ts        # Unit & regression tests for prompt engines
+│   │   ├── typeDetector.test.ts         # Reverse-TLD vs subdomain domain detection tests
+│   │   ├── shareUrl.test.ts             # URLSearchParams shareable link encoding/decoding tests
 │   │   └── regression.test.tsx          # React 19 UI component hierarchy & mode transition tests
 │   ├── App.tsx                          # Root responsive layout
 │   ├── main.tsx                         # React 19 DOM entry point & Service Worker registration

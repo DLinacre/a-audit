@@ -98,7 +98,11 @@ export function detectTypeFromInputs(state: BuilderState): {
   if (/\.ipa\b|bundle\s*id|ios\s*app|iphone|ipad/.test(blob) && !/android/.test(blob)) return { type: "ios", why: "iOS package / platform signals detected" };
   if (/\.exe\b|\.msi\b|\.dmg\b|\.appimage\b|\.deb\b|\.pkg\b|windows\s*app|macos\s*app|desktop\s*app/.test(blob)) return { type: "desktop", why: "Desktop installer/executable signals detected" };
 
-  if (/^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*){2,}$/i.test(cleanRaw(state.targetInput))) {
+  const targetClean = cleanRaw(state.targetInput);
+  if (
+    /^(com|org|net|io|gov|edu|uk|de|fr|us)\.[a-z0-9_]+(\.[a-z0-9_]+)+$/i.test(targetClean) &&
+    !/\.(com|org|net|io|co|us|uk|de|fr|eu|xyz|site|page)$/i.test(targetClean)
+  ) {
     return { type: "android", why: "Looks like an Android package name" };
   }
 
